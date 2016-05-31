@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Password Protected Area"
+AuthUserFile /home/www/humlelogen_dk/htdocs/card/.htpasswd
+Require valid-user
