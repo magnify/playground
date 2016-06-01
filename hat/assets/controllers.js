@@ -22,47 +22,49 @@ var hatApp = angular.module('hatApp', []);
 * */
 
 hatApp.controller('HatControl', function($scope) {
-  $scope.hats = [
+  var hats = [
+    'bandana',
+    'blondparyk',
+    'chipchap',
+    'guiness',
+    'hotdog',
+    'joker',
+    'lyseroedcowboy',
+    'nissehue',
+    'pirat',
+    'roedcowboy',
+    'tophat',
+    'troldmand',
+  ];
 
-    {
-    name: "Hatte 1 forside",
-    children: [
-      {image: ""},
-      {image: "bandana"},
-      {image: "blondparyk"},
-      {image: ""},
-      {image: "chipchap"},
-      {image: ""},
-      {image: ""},
-      {image: "guiness"},
-      {image: "hotdog"},
-      {image: ""},
-      {image: ""},
-      {image: "joker"},
-      {image: ""},
-      {image: "lyseroedcowboy"},
-      {image: "nissehue"}
-    ]},
+  var cards = [];
 
-    {
-    name: "Hatte 1 bagside",
-    children: [
-      {image: ""},
-      {image: "pirat"},
-      {image: "roedcowboy"},
-      {image: ""},
-      {image: "tophat"},
-      {image: ""},
-      {image: ""},
-      {image: "troldmand"},
-      {image: "troldmand"},
-      {image: ""},
-      {image: ""},
-      {image: "troldmand"},
-      {image: ""},
-      {image: "troldmand"},
-      {image: "troldmand"}
-    ]}
-  ]
+
+  for (var i = 0; i < hats.length; i++) {
+    var missingHat = hats[i];
+
+    var card = [missingHat];
+
+    for(var j = 0; j < 7; j++) {
+      var availableCards = _.difference(hats, card);
+      var nextCard = availableCards[Math.floor(Math.random() * availableCards.length)]
+      card.push(nextCard);
+    }
+
+    cards.push({
+        name: 'forside',
+        children: _.shuffle(card).map(function (x) {
+          return {image: x}
+        })
+      }, {
+       name: 'bagside',
+       children: _.shuffle(_.without(card, missingHat)).map(function(x) {
+         return { image: x }
+       })
+     }
+    );
+  }
+
+  $scope.hats = cards;
 });
 
