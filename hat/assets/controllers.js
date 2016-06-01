@@ -45,7 +45,7 @@ hatApp.controller('HatControl', function($scope) {
 
     var card = [missingHat];
 
-    for(var j = 0; j < 7; j++) {
+    for(var j = 0; j < 5; j++) {
       var availableCards = _.difference(hats, card);
       var nextCard = availableCards[Math.floor(Math.random() * availableCards.length)]
       card.push(nextCard);
